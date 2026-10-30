@@ -59,12 +59,43 @@ section h2::after{content:"";display:block;width:3.5rem;height:4px;background:va
 .job time{display:block;color:var(--blue);font-weight:600;font-size:.92rem}
 .job h3{font-size:1.25rem;margin:.1rem 0 .3rem}
 .job p{margin:0;color:var(--muted)}
-footer{background:linear-gradient(135deg,var(--navy),#071a45);color:#fff;text-align:center;padding:5rem 1.5rem 2.5rem}
-footer h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:.8rem}
-footer p{margin:0 auto 1.5rem;max-width:30rem;color:#d7e1ff}
-footer .links{display:flex;gap:1.5rem;justify-content:center;margin-top:1.8rem}
-footer .links a{color:#fff}
-footer small{display:block;margin-top:3rem;color:#9fb1de}
+.contact{background:#121a2e;color:#fff;padding:5rem 1.5rem}
+.contact .cols2{max-width:64rem;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:3rem;align-items:start}
+.contact h2{color:var(--glow);font-size:1.5rem;margin-bottom:1rem}
+.contact h2::after{display:none}
+.contact .lead{color:#d7e1ff;margin:0 0 1.5rem}
+.contact dt{font:700 1.1rem "Playfair Display",serif;color:var(--glow);margin-top:1.2rem}
+.contact dd{margin:.1rem 0 0;color:#e3eaff}
+.contact dd a{color:#fff}
+.card-form{background:#0a1020;border:1px solid #243153;border-radius:.8rem;padding:2rem}
+.card-form h3{font-size:2rem;margin-bottom:.5rem}
+.card-form>p{margin:0 0 1.5rem;color:#b9c5e6;font-size:.98rem}
+.card-form label{display:block;font-weight:600;font-size:.95rem;margin:1rem 0 .35rem}
+.card-form label i{color:#ff6b6b;font-style:normal}
+.card-form input,.card-form textarea{width:100%;padding:.75rem .9rem;border-radius:.5rem;border:1px solid #2a3a63;background:#0e1730;color:#fff;font:inherit;font-size:.98rem}
+.card-form textarea{min-height:8rem;resize:vertical}
+.card-form input::placeholder,.card-form textarea::placeholder{color:#7f8db3}
+.card-form input:focus,.card-form textarea:focus{outline:none;border-color:var(--glow);box-shadow:0 0 0 3px rgba(122,162,255,.25)}
+.card-form button{margin-top:1.4rem;width:100%;padding:.85rem;border:0;border-radius:.5rem;background:var(--glow);color:#0a1226;font:700 1rem "Open Sans",sans-serif;cursor:pointer;transition:.2s}
+.card-form button:hover{background:#fff;transform:translateY(-2px)}
+.note{display:block;margin-top:.8rem;font-size:.85rem;color:#8fa0cf}
+footer{background:#0a1020;color:#fff;padding:4rem 1.5rem 1.5rem}
+.fgrid{max-width:64rem;margin:0 auto;display:grid;grid-template-columns:1.6fr 1.2fr .9fr 1fr;gap:2rem}
+footer h4{font:700 1.2rem "Playfair Display",serif;margin:0 0 1.2rem}
+footer .brand{font:700 1.5rem "Playfair Display",serif;letter-spacing:.25em;color:var(--glow);text-transform:uppercase}
+footer .role{font-weight:600;font-size:.95rem;margin:.2rem 0 1rem}
+footer p{margin:0;color:#c3d0f2;font-size:.98rem}
+footer ul{list-style:none;margin:0;padding:0}
+footer li{margin-bottom:.7rem;font-weight:600;font-size:.95rem}
+footer a{color:#fff;text-decoration:none}
+footer a:hover{color:var(--glow)}
+footer li svg{width:1.1rem;height:1.1rem;vertical-align:-.2em;margin-right:.5rem;fill:none;stroke:var(--glow);stroke-width:2}
+.social{display:flex;gap:1rem}
+.social a{display:grid;place-items:center;width:2.4rem;height:2.4rem;border:1px solid #243153;border-radius:50%}
+.social svg{width:1.15rem;height:1.15rem;fill:var(--glow)}
+.copy{max-width:64rem;margin:3rem auto 0;padding-top:1.2rem;border-top:1px solid #243153;text-align:center;color:#8fa0cf;font-size:.88rem}
+@media (max-width:820px){.contact .cols2,.fgrid{grid-template-columns:1fr 1fr}.contact .cols2{grid-template-columns:1fr}}
+@media (max-width:520px){.fgrid{grid-template-columns:1fr}.card-form{padding:1.4rem}}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
 .reveal.in-view,.no-js .reveal{opacity:1;transform:none}
 @media (max-width:720px){.cols{grid-template-columns:1fr;text-align:center}.avatar{margin-inline:auto}.frame{padding:1.5rem}nav div{gap:.9rem;font-size:.9rem}}
@@ -107,12 +138,42 @@ footer small{display:block;margin-top:3rem;color:#9fb1de}
 <div class="job"><time>Education</time><h3>Philippine Electronics and Communication Institute of Technology (PECIT)</h3><p>Bachelor of Science in Information Systems (BSIS)<br>Currently pursuing studies with an interest in web development, user interface design, and modern web technologies.</p></div>
 </div></div></section>
 
-<footer id="contact">
-<h2>Let’s work together</h2>
-<p>Have a project or a job opening? Send me a message and I’ll get back to you.</p>
-<a class="btn fill" href="mailto:choloquarteros@gmail.com">choloquarteros@gmail.com</a>
-<div class="links"><a href="#">LinkedIn</a><a href="#">GitHub</a></div>
-<small>© 2026 Jerry Quarteros</small>
+<section class="contact" id="contact"><div class="cols2 reveal">
+<div>
+<h2>Let’s Talk</h2>
+<p class="lead">I’m currently available for freelance projects, website development, and full-time opportunities. Whether you need a new website, website updates, or a developer to join your team, feel free to send a message.</p>
+<dl>
+<dt>Email</dt><dd><a href="mailto:choloquarteros@gmail.com">choloquarteros@gmail.com</a></dd>
+<dt>Location</dt><dd>Cagayan de Oro, Philippines</dd>
+<dt>Availability</dt><dd>Open for Freelance &amp; Full-Time Roles</dd>
+</dl>
+</div>
+<form class="card-form" id="cform">
+<h3>Send a Message</h3>
+<p>Feel free to send a message for freelance projects, collaborations, or full-time opportunities.</p>
+<label for="n">Name <i>*</i></label><input id="n" required placeholder="Your Name" autocomplete="name">
+<label for="e">Email <i>*</i></label><input id="e" type="email" required placeholder="Your Email" autocomplete="email">
+<label for="s">Subject</label><input id="s" placeholder="Subject">
+<label for="m">Message <i>*</i></label><textarea id="m" required placeholder="Tell me about your project..."></textarea>
+<button type="submit">Send Message</button>
+<span class="note">This opens your email app with the message filled in.</span>
+</form>
+</div></section>
+
+<footer>
+<div class="fgrid">
+<div><div class="brand">Jerry Quarteros</div><div class="role">Web Developer &amp; UI Designer</div><p>I build fast, accessible websites and turn designs into polished, working interfaces.</p></div>
+<div><h4>Contact</h4><ul>
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:choloquarteros@gmail.com">choloquarteros@gmail.com</a></li>
+<li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Cagayan de Oro, Philippines</li></ul></div>
+<div><h4>Links</h4><ul><li><a href="#">Home</a></li><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#experience">Experience</a></li><li><a href="#contact">Contact</a></li></ul></div>
+<div><h4>Get in Touch</h4><div class="social">
+<a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+<a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.700V21h-4z"/></svg></a>
+<a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.600-1.100-4.600-5 0-1.100.4-2 1-2.700-.1-.3-.4-1.300.1-2.700 0 0 .8-.3 2.800 1a9.600 9.600 0 0 1 5 0c1.900-1.300 2.800-1 2.800-1 .5 1.400.2 2.400.1 2.700.6.7 1 1.600 1 2.700 0 3.900-2.400 4.700-4.600 5 .4.3.7.9.7 1.900v2.800c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg></a>
+</div></div>
+</div>
+<div class="copy">© 2026 Jerry Quarteros. All rights reserved.</div>
 </footer>
 
 <script>
@@ -124,6 +185,11 @@ if("IntersectionObserver" in window){
 var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in-view");io.unobserve(x.target)}})},{threshold:.12});
 document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
 }else{document.querySelectorAll(".reveal").forEach(function(el){el.classList.add("in-view")})}
+document.getElementById("cform").addEventListener("submit",function(ev){ev.preventDefault();
+var g=function(i){return document.getElementById(i).value.trim()};
+var sub=g("s")||"Portfolio inquiry from "+g("n");
+var body="Name: "+g("n")+"\nEmail: "+g("e")+"\n\n"+g("m");
+location.href="mailto:choloquarteros@gmail.com?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body)});
 </script>
 </body>
 </html>
