@@ -91,7 +91,7 @@ footer div{display:flex;gap:1.4rem}
 <h1>Jerry <span>Quarteros</span></h1>
 <div class="row">
 <div><p class="lead">I build fast, accessible websites and turn designs into polished, working interfaces.</p>
-<div class="btns"><a class="btn lime" href="#contact">Let’s talk</a><a class="btn" href="resume.pdf">Download resume</a></div></div>
+<div class="btns"><a class="btn lime" href="#contact">Let’s talk</a><a class="btn" id="cv" href="Jerry-Quarteros-CV.pdf" download="Jerry-Quarteros-CV.pdf">Download CV</a></div></div>
 </div>
 </header>
 
@@ -136,8 +136,10 @@ I'm always eager to learn, improve my skills, and take on new opportunities with
 </form></div>
 </div></section>
 
-<footer><span>© 2026 Jerry Quarteros</span><div><a href="#">LinkedIn</a><a href="https://github.com/cholo061805">GitHub</a><a href="https://www.facebook.com/jerryquarteros2005">Facebook</a></div></footer>
+<footer><span>© 2026 Jerry Quarteros</span><div><a href="https://www.instagram.com/choloquarteros?vrfl=MW8yaGYxOHJ4MmR0Zw==
+">Instagram</a><a href="https://github.com/cholo061805">GitHub</a><a href="https://www.facebook.com/jerryquarteros2005">Facebook</a></div></footer>
 
+<script src="cv-data.js"></script>
 <script>
 document.body.classList.remove("nojs");
 var els=document.querySelectorAll(".rv");
@@ -146,6 +148,34 @@ document.getElementById("f").addEventListener("submit",function(ev){ev.preventDe
 var g=function(i){return document.getElementById(i).value.trim()};
 var sub=g("s")||"Portfolio inquiry from "+g("n");
 location.href="mailto:choloquarteros@gmail.com?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent("Name: "+g("n")+"\nEmail: "+g("e")+"\n\n"+g("m"))});
+document.getElementById("cv").addEventListener("click",function(ev){
+  ev.preventDefault();
+  var a=this,url=a.href,name="Jerry-Quarteros-CV.pdf";
+  function save(u){
+    var l=document.createElement("a");
+    l.href=u;l.download=name;l.style.display="none";
+    document.body.appendChild(l);l.click();l.remove();
+  }
+  function fromBlob(b){
+    var u=URL.createObjectURL(new Blob([b],{type:"application/octet-stream"}));
+    save(u);
+    setTimeout(function(){URL.revokeObjectURL(u)},1500);
+  }
+  if(window.CV_B64){
+    var bin=atob(window.CV_B64),arr=new Uint8Array(bin.length);
+    for(var i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+    fromBlob(arr);
+    return;
+  }
+  function viaXHR(){
+    var x=new XMLHttpRequest();
+    x.open("GET",url);x.responseType="blob";
+    x.onload=function(){(x.status===200||x.status===0)&&x.response&&x.response.size?fromBlob(x.response):save(a.getAttribute("href"))};
+    x.onerror=function(){save(a.getAttribute("href"))};
+    x.send();
+  }
+  if(window.fetch){fetch(url).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(fromBlob).catch(viaXHR)}else{viaXHR()}
+});
 </script>
 </body>
 </html>
