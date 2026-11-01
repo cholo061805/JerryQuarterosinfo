@@ -102,7 +102,9 @@ textarea{min-height:7rem;resize:vertical}
 input:focus,textarea:focus{outline:none;border-color:var(--lime)}
 ::placeholder{color:#5c6275}
 button{justify-self:start;cursor:pointer;font:700 1rem "DM Sans",sans-serif;background:var(--lime);color:#000;border:0;border-radius:3rem;padding:.9rem 2rem;transition:.2s;min-height:3rem}
+button:disabled{opacity:.6;cursor:wait}
 .hint{font-size:.85rem;color:var(--mute)}
+#status{color:var(--lime);min-height:1.4em;margin:0}
 footer{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:2rem calc(var(--pad) + var(--sr)) calc(2rem + var(--sb)) calc(var(--pad) + var(--sl));color:var(--mute);font-size:.92rem}
 footer a{text-decoration:none;padding:.3rem 0;display:inline-block}
 footer div{display:flex;gap:1.4rem;flex-wrap:wrap}
@@ -226,7 +228,8 @@ nav{position:absolute}
 <label>Subject<input id="s" placeholder="What’s it about?"></label>
 <label>Message<textarea id="m" required placeholder="Tell me about your project..."></textarea></label>
 <button type="submit">Send message →</button>
-<span class="hint">Opens your email app with the message filled in.</span>
+<span class="hint" id="hint">Your message is sent straight to my inbox.</span>
+<p id="status" class="hint" role="status"></p>
 </form></div>
 </div></section>
 
@@ -236,10 +239,36 @@ nav{position:absolute}
 document.body.classList.remove("nojs");
 var els=document.querySelectorAll(".rv");
 if("IntersectionObserver" in window){var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add("on");io.unobserve(x.target)}})},{threshold:.1});els.forEach(function(el){io.observe(el)})}else{els.forEach(function(el){el.classList.add("on")})}
-document.getElementById("f").addEventListener("submit",function(ev){ev.preventDefault();
-var g=function(i){return document.getElementById(i).value.trim()};
-var sub=g("s")||"Portfolio inquiry from "+g("n");
-location.href="mailto:choloquarteros@gmail.com?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent("Name: "+g("n")+"\nEmail: "+g("e")+"\n\n"+g("m"))});
+
+/* Contact form settings */
+var TO="choloquarteros@gmail.com";
+var FORM_ENDPOINT="https://formsubmit.co/ajax/choloquarteros@gmail.com";  /* sends straight to your inbox. Set to "" to use Gmail compose only */
+var FORM_KEY="";       /* only for Web3Forms: your access key */
+
+var f=document.getElementById("f"),st=document.getElementById("status"),btn=f.querySelector("button");
+if(FORM_ENDPOINT)document.getElementById("hint").textContent="Your message is sent straight to my inbox.";
+f.addEventListener("submit",function(ev){
+  ev.preventDefault();
+  var g=function(i){return document.getElementById(i).value.trim()};
+  var sub=g("s")||"Portfolio inquiry from "+g("n");
+  var body="Name: "+g("n")+"\nEmail: "+g("e")+"\n\n"+g("m");
+  function viaGmail(){
+    var u="https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(TO)+"&su="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body);
+    if(!window.open(u,"_blank"))location.href="mailto:"+TO+"?subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body);
+    st.textContent="Gmail should open in a new tab with your message ready. Press Send there to deliver it.";
+  }
+  if(!FORM_ENDPOINT){viaGmail();return}
+  btn.disabled=true;st.textContent="Sending…";
+  var fd=new FormData();
+  fd.append("name",g("n"));fd.append("email",g("e"));fd.append("subject",sub);fd.append("message",g("m"));
+  fd.append("_subject",sub);fd.append("_replyto",g("e"));fd.append("_captcha","false");fd.append("_template","table");
+  if(FORM_KEY)fd.append("access_key",FORM_KEY);
+  fetch(FORM_ENDPOINT,{method:"POST",body:fd,headers:{Accept:"application/json"}})
+    .then(function(r){return r.json()})
+    .then(function(d){if(!(d&&(d.success===true||d.success==="true")))throw 0;f.reset();st.textContent="Thanks! Your message was sent. I will get back to you soon."})
+    .catch(function(){st.textContent="Could not send automatically.";viaGmail()})
+    .then(function(){btn.disabled=false});
+});
 </script>
 </body>
 </html>
